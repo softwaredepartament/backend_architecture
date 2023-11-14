@@ -1,16 +1,16 @@
-const allowlist = process.env.ORIGIN ?? eval(process.env.ORIGIN)
+const allowlist = process.env.ORIGIN ?? eval(process.env.ORIGIN);
 
 const CORS_OPTIONS = {
     origin: function (origin, callback) {
         let corsOptions;
         if (allowlist == '*') {
-            corsOptions = true 
+            corsOptions = true;
         } else if (allowlist.indexOf(origin) !== -1) {
-            corsOptions = true 
+            corsOptions = true;
         } else {
-            corsOptions =  false
+            corsOptions = false;
         }
-        callback(null, corsOptions)
+        callback(null, corsOptions);
     },
     methods: ['GET', 'HEAD', 'POST', 'PATCH', 'DELETE', 'PUT'],
     credentials: process.env.CREDENTIALS === 'true',
