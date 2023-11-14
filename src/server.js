@@ -1,3 +1,5 @@
 const app = require('./app');
 
-app([]);
+const users = require('./module/users/users.index')
+
+app([users]);
