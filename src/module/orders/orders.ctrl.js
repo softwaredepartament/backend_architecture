@@ -1,9 +1,9 @@
 const path = require('path');
-const { ordersModel } = require('./orders.model.js');
+const { orderModel } = require('./orders.model.js');
 
 async function orderCtrl(req, res) {
     try {
-        const model = await ordersModel(req.params);
+        const model = await orderModel(req.params);
 
         // return res.status(404).sendFile(path.join(process.cwd(), `/log/users/error/14.11.2023.txt`))
 

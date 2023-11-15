@@ -29,7 +29,7 @@ function logger(isFileRequired = false) {
                         }
                         originalEnd.apply(res, arguments);
                     } catch (error) {
-                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR);
+                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, logger);
                         return res.status(500).json({
                             status: 500,
                             message: `Syntax error`,
@@ -51,7 +51,7 @@ function logger(isFileRequired = false) {
                         );
                         originalSendFile.call(this, path, options, callback);
                     } catch (error) {
-                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR);
+                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'logger');
                         return res.status(500).json({
                             status: 500,
                             message: `Syntax error`,
@@ -80,7 +80,7 @@ function logger(isFileRequired = false) {
                         }
                         originalEnd.apply(res, arguments);
                     } catch (error) {
-                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR);
+                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'logger');
                         return res.status(500).json({
                             status: 500,
                             message: `Syntax error`,
@@ -102,7 +102,7 @@ function logger(isFileRequired = false) {
                         );
                         originalSendFile.call(this, path, options, callback);
                     } catch (error) {
-                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR);
+                        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'logger');
                         return res.status(500).json({
                             status: 500,
                             message: `Syntax error`,
@@ -113,7 +113,7 @@ function logger(isFileRequired = false) {
             }
             next();
         } catch (error) {
-            new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR);
+            new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'logger');
             return res.status(500).json({
                 status: 500,
                 message: `Syntax error`,

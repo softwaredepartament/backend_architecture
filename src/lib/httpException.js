@@ -1,3 +1,5 @@
+const { httpExceptionLogWriter } = require("../shared/logger.shared");
+
 const errors = {
     INTERNAL_SERVER_ERROR: 'INTERNAL_SERVER_ERROR',
     INVALID_TOKEN: 'INVALID_TOKEN',
@@ -8,10 +10,13 @@ const errors = {
 };
 
 class HttpException {
-    constructor(status, message, error) {
+    constructor(status, message, error, functionName) {
         this.status = status;
         this.message = message || '';
         this.error = error;
+        this.functionName = functionName;
+
+        httpExceptionLogWriter('httpExceptionLogWriter', functionName, status, message, error)
     }
 }
 
