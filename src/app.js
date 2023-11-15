@@ -1,6 +1,7 @@
 require('dotenv').config({ path: `.env` });
 
 const { logger } = require('./middleware/logger.middleware');
+const { loggerCron } = require('./config/logger');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
 const cors = require('cors');
@@ -25,6 +26,10 @@ async function app(routes) {
         app.use(express.urlencoded({ extended: true }));
     }
 
+    function initCronjobs() {
+        loggerCron();
+    }
+
     function initRoutes(routes) {
         routes.forEach(route => {
             app.use(route);
@@ -32,6 +37,7 @@ async function app(routes) {
     }
 
     async function runner() {
+        initCronjobs();
         initMiddlewares();
         initRoutes(routes);
         listener();
