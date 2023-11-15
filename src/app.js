@@ -1,6 +1,7 @@
 require('dotenv').config({ path: `.env` });
 
 const { logger } = require('./middleware/logger.middleware');
+const expressFileupload = require('express-fileupload');
 const { loggerCron } = require('./config/logger');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
@@ -24,6 +25,7 @@ async function app(routes) {
         app.use(cors(CORS_OPTIONS));
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
+        app.use(expressFileupload());
     }
 
     function initCronjobs() {

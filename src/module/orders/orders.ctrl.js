@@ -1,9 +1,9 @@
 const path = require('path')
-const { usersModel } = require("./users.model");
+const { ordersModel } = require("./orders.model.js");
 
-async function usersCtrl(req, res) {
+async function orderCtrl(req, res) {
     try {
-        const model = await usersModel(req.params)
+        const model = await ordersModel(req.params)
         
         // return res.status(404).sendFile(path.join(process.cwd(), `/log/users/error/14.11.2023.txt`))
 
@@ -20,5 +20,5 @@ async function usersCtrl(req, res) {
 
 
 module.exports = {
-    usersCtrl
+    orderCtrl
 }

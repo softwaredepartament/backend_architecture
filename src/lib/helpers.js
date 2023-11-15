@@ -7,6 +7,16 @@ function getCurrentDateFormatted() {
     return day + '.' + month + '.' + year;
 }
 
+function getCurrentTimeFormatted() {
+    const now = new Date();
+    const hours = String(now.getUTCHours()).padStart(2, '0');
+    const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(now.getUTCSeconds()).padStart(2, '0');    
+
+    return hours + ':' + minutes + ':' + seconds;
+}
+
 module.exports = {
-    getCurrentDateFormatted
+    getCurrentDateFormatted,
+    getCurrentTimeFormatted
 }
