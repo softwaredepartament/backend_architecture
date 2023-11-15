@@ -4,10 +4,10 @@ const errors = {
     TOKEN_EXPIRED: 'TOKEN_EXPIRED',
     TOKEN_REVOKED: 'TOKEN_REVOKED',
     FORBIDDEN_ERROR: 'FORBIDDEN_ERROR',
-    UNAUTHORIZED: 'UNAUTHORIZED'
-}
+    UNAUTHORIZED: 'UNAUTHORIZED',
+};
 
-class HttpException{
+class HttpException {
     constructor(status, message, error) {
         this.status = status;
         this.message = message || '';
@@ -18,4 +18,4 @@ class HttpException{
 module.exports = {
     errors,
     HttpException,
-}
+};

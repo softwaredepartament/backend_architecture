@@ -1,24 +1,22 @@
-const path = require('path')
-const { usersModel } = require("./users.model");
+const path = require('path');
+const { usersModel } = require('./users.model');
 
 async function usersCtrl(req, res) {
     try {
-        const model = await usersModel(req.params)
-        
+        const model = await usersModel(req.params);
+
         // return res.status(404).sendFile(path.join(process.cwd(), `/log/users/error/14.11.2023.txt`))
 
         return res.status(200).send({
             status: 200,
             message: 'ishladi',
-            data: 'hozircha data yoooooqq'
-        })
+            data: 'hozircha data yoooooqq',
+        });
     } catch (error) {
-        return res.status(error.status).json(error)
+        return res.status(error.status).json(error);
     }
 }
 
-
-
 module.exports = {
-    usersCtrl
-}
+    usersCtrl,
+};
