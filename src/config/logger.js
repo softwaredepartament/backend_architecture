@@ -8,19 +8,21 @@ function logFileCreater() {
     
     const logModule = fs.readdirSync(path.join(process.cwd(), '/log'))
     for (const module of logModule) {
-        const checkIfFolderExistsFiles = fs.existsSync(path.join(process.cwd(), `/log/${module}/files/`))
         const checkIfFolderExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/`))
+        const checkIfFolderExistsFiles = fs.existsSync(path.join(process.cwd(), `/log/${module}/files/`))
         const checkIfFolderExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/`))
-        
-        if (!checkIfFolderExistsFiles) {
-            fs.mkdirSync(path.join(process.cwd(), `/log/${module}/files/`))
-        }
         
         if (!checkIfFolderExistsError) {
             fs.mkdirSync(path.join(process.cwd(), `/log/${module}/error/`))
         }
 
-        if (!checkIfFolderExistsSuccess) {
+        let checkIsConfigFolder = path.join(process.cwd(), `/log/${module}`).split('\\')
+        checkIsConfigFolder = checkIsConfigFolder[checkIsConfigFolder.length - 1]
+        if (!checkIfFolderExistsFiles && checkIsConfigFolder[0] != '_') {
+            fs.mkdirSync(path.join(process.cwd(), `/log/${module}/files/`))
+        }
+
+        if (!checkIfFolderExistsSuccess && checkIsConfigFolder[0] != '_') {
             fs.mkdirSync(path.join(process.cwd(), `/log/${module}/success/`))
         }
         
@@ -28,10 +30,10 @@ function logFileCreater() {
         const checkIfFileExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`))
         const checkIfFileExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.txt`))
         
-        if (!checkIfFileExistsError) {
+        if (!checkIfFileExistsError && checkIsConfigFolder[0] != '_') {
             fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), '')
         }
-        if (!checkIfFileExistsSuccess) {
+        if (!checkIfFileExistsSuccess && checkIsConfigFolder[0] != '_') {
             fs.writeFileSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.txt`), '')
         }
     }
