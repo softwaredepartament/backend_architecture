@@ -1,8 +1,8 @@
-const HttpException = require('./../../lib/httpException')
+const { HttpException, errors } = require('./../../lib/httpException')
 
 async function usersModel(params) {
     if (params.id == 1) {
-        throw new HttpException(404, "BRANCH_NOT_FOUND", 'Filsdasdasdial topilmadi!');
+        throw new HttpException(404, errors.INVALID_TOKEN, 'Filsdasdasdial topilmadi!');
     }
 
     return 200

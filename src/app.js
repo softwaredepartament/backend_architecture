@@ -1,6 +1,6 @@
 require('dotenv').config({ path: `.env` });
 
-const errorMiddleware = require('./middleware/error.middleware');
+const { logger } = require('./middleware/logger.middleware');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
 const cors = require('cors');
@@ -19,7 +19,7 @@ async function app(routes) {
     }
 
     function initMiddlewares() {
-        app.use(errorMiddleware);
+        app.use(logger());
         app.use(cors(CORS_OPTIONS));
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));

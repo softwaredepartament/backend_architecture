@@ -1,4 +1,3 @@
-const HttpException = require('./../../lib/httpException')
 const { usersModel } = require("./users.model");
 
 async function usersCtrl(req, res) {
