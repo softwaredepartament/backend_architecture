@@ -43,7 +43,6 @@ function loggerCron() {
         logFileCreater();
     });
 }
-logFileCreater();
 
 module.exports = {
     logFileCreater,

@@ -46,10 +46,11 @@ function httpExceptionLogWriter(module, functionName, status, message, error) {
 
         const result = `${nowTime} ${nowDate} +0000 ${functionName} ↓\nstatus = ${status} && message = ${message} && error = ${error}‼`;
 
-        let readFile = fs.readFileSync(path.join(process.cwd(), `/log/${module}/${logType}/${nowDate}.txt`));
+        let readFile = fs.readFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`));
         readFile = readFile.toString().length ? readFile + '\n' + result : result;
-        fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${logType}/${nowDate}.txt`), readFile);
+        fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), readFile);
     } catch (error) {
+        console.log(error);
         new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'httpExceptionLogWriter');
     }
 }

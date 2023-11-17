@@ -80,6 +80,7 @@ function logger(isFileRequired = false) {
                         }
                         originalEnd.apply(res, arguments);
                     } catch (error) {
+                        console.log(error);
                         new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'logger');
                         return res.status(500).json({
                             status: 500,

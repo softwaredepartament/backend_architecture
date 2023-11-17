@@ -6,11 +6,13 @@ const { loggerCron } = require('./config/logger');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
 const cors = require('cors');
+const { getErrorLine } = require('./lib/helpers');
+const { defaultFilesCreater } = require('./config/defaultfiles');
 
 async function app(routes) {
     const app = express();
     const port = process.env.PORT;
-
+    
     function listener() {
         app.listen(port, () => {
             console.info('=================================');
@@ -19,7 +21,7 @@ async function app(routes) {
             console.info('=================================');
         });
     }
-
+    
     function initMiddlewares() {
         app.use(logger());
         app.use(cors(CORS_OPTIONS));
@@ -27,24 +29,29 @@ async function app(routes) {
         app.use(express.urlencoded({ extended: true }));
         app.use(expressFileupload());
     }
-
+    
     function initCronjobs() {
         loggerCron();
     }
 
+    function defaultFiles() {
+        defaultFilesCreater()
+    }
+    
     function initRoutes(routes) {
         routes.forEach(route => {
             app.use(route);
         });
     }
-
+    
     async function runner() {
+        defaultFiles()
         initCronjobs();
         initMiddlewares();
         initRoutes(routes);
         listener();
     }
-
+    
     runner();
 }
 

@@ -16,7 +16,18 @@ class HttpException {
         this.error = error;
         this.functionName = functionName;
 
-        httpExceptionLogWriter('httpExceptionLogWriter', functionName, status, message, error)
+        httpExceptionLogWriter('_httpexception', functionName, status, message, error)
+    }
+}
+
+class ErrorHandler {
+    constructor(status, message, error, functionName) {
+        this.status = status;
+        this.message = message || '';
+        this.error = error;
+        this.functionName = functionName;
+
+        httpExceptionLogWriter('_httpexception', functionName, status, message, error)
     }
 }
 
