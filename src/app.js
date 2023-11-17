@@ -1,13 +1,12 @@
 require('dotenv').config({ path: `.env` });
 
-const { logger } = require('./middleware/logger.middleware');
+const { defaultFilesCreater } = require('./shared/config/defaultfiles.config');
+const { runConfigCronJobs } = require('./shared/config/cronjobs.config');
+// const { logger } = require('./middleware/logger.middleware');
 const expressFileupload = require('express-fileupload');
-const { loggerCron } = require('./config/logger');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
 const cors = require('cors');
-const { getErrorLine } = require('./lib/helpers');
-const { defaultFilesCreater } = require('./config/defaultfiles');
 
 async function app(routes) {
     const app = express();
@@ -23,7 +22,7 @@ async function app(routes) {
     }
     
     function initMiddlewares() {
-        app.use(logger());
+        // app.use(logger());
         app.use(cors(CORS_OPTIONS));
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
@@ -31,7 +30,7 @@ async function app(routes) {
     }
     
     function initCronjobs() {
-        loggerCron();
+        runConfigCronJobs();
     }
 
     function defaultFiles() {

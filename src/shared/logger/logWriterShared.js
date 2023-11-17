@@ -1,5 +1,5 @@
-const { getCurrentDateFormatted, getCurrentTimeFormatted } = require('../lib/helpers');
-const { HttpException, errors } = require('../lib/httpException');
+const { getCurrentDateFormatted, getCurrentTimeFormatted } = require('../../lib/helpers');
+const { HttpException, errors } = require('../../lib/httpException');
 const path = require('path');
 const fs = require('fs');
 
