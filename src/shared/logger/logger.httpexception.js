@@ -1,9 +1,9 @@
-const { getCurrentDateFormatted, getCurrentTimeFormatted, getErrorLine } = require("../lib/helper");
+const { getCurrentDateFormatted, getCurrentTimeFormatted } = require("../lib/helper");
 const { internalErrorCatcher } = require("./logger.internal");
 const path = require('path')
 const fs = require('fs');
 
-function httpExceptionLogWriter(status, message, error) {
+function httpExceptionLogWriter(status, message, error, body) {
     try {
         const nowDate = getCurrentDateFormatted();
         const nowTime = getCurrentTimeFormatted();
@@ -13,7 +13,7 @@ function httpExceptionLogWriter(status, message, error) {
             fs.writeFileSync(path.join(process.cwd(), `/log/_httpException/error/${nowDate}.txt`), '');
         }
 
-        const result = `${nowTime} ${nowDate} +0000 → "${error instanceof Error ? getErrorLine(error) : error}" ↓\nstatus = ${status} && message = ${message} && error = ${error}‼`;
+        const result = `${nowTime} ${nowDate} +0000 ↓\nstatus = ${status} && message = ${message} && error = ${error} ▄\n${JSON.stringify(body, null, 4)}‼`;
 
         let readFile = fs.readFileSync(path.join(process.cwd(), `/log/_httpException/error/${nowDate}.txt`));
         readFile = readFile.toString().length ? readFile + '\n' + result : result;

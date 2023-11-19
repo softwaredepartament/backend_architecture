@@ -10,12 +10,12 @@ const errors = {
 };
 
 class HttpException {
-    constructor(status, message, error) {
+    constructor(status, message, error, body) {
         this.status = status;
         this.message = message || '';
         this.error = error; 
 
-        httpExceptionLogWriter(status, message, error)
+        httpExceptionLogWriter(status, message, error, body)
     }
 }
 
