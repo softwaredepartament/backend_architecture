@@ -2,6 +2,7 @@ const { getCurrentDateFormatted, getCurrentTimeFormatted } = require('../../lib/
 const { HttpException, errors } = require('../../lib/httpException');
 const path = require('path');
 const fs = require('fs');
+const { internalErrorCatcher } = require('./logger.internal');
 
 function logWriter(module, statusCode, host, method, url, userAgent, body, res) {
     try {
@@ -30,32 +31,10 @@ function logWriter(module, statusCode, host, method, url, userAgent, body, res) 
         readFile = readFile.toString().length ? readFile + '\n' + result : result;
         fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${logType}/${nowDate}.txt`), readFile);
     } catch (error) {
-        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'logWriter');
-    }
-}
-
-function httpExceptionLogWriter(module, functionName, status, message, error) {
-    try {
-        const nowDate = getCurrentDateFormatted();
-        const nowTime = getCurrentTimeFormatted();
-
-        const checkIfFileExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`));
-        if (!checkIfFileExistsError) {
-            fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), '');
-        }
-
-        const result = `${nowTime} ${nowDate} +0000 ${functionName} ↓\nstatus = ${status} && message = ${message} && error = ${error}‼`;
-
-        let readFile = fs.readFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`));
-        readFile = readFile.toString().length ? readFile + '\n' + result : result;
-        fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), readFile);
-    } catch (error) {
-        console.log(error);
-        new HttpException(500, `Syntax error ${error}`, errors.INTERNAL_SERVER_ERROR, 'httpExceptionLogWriter');
+        internalErrorCatcher(error)
     }
 }
 
 module.exports = {
-    logWriter,
-    httpExceptionLogWriter
+    logWriter
 };

@@ -13,9 +13,6 @@ fileupload
 04:31:13 15.11.2023 +0000 DELETE 100 /api/branches → 10.10.0.100 - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 04:31:13 15.11.2023 +0000 PATCH  321 /api/orders → 245.215.0.199 - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 
-04:31:13 15.11.2023 +0000 function nomi ↓
-status = 200 && message = 'not found' && error = 'INTERNAL_SERVER_ERROR'‼
-
 
 
 v1 ↓

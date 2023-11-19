@@ -1,4 +1,4 @@
-const { getCurrentDateFormatted } = require('../../lib/helpers');
+const { getCurrentDateFormatted } = require('./../lib/helper');
 const cron = require('node-cron');
 const path = require('path');
 const fs = require('fs');
