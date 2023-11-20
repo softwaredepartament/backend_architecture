@@ -4,35 +4,34 @@ const path = require('path');
 const fs = require('fs');
 
 function logFolderCreator() {
-    const checkLogFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/`))
+    const checkLogFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/`));
     if (!checkLogFolderIsExists) {
         fs.mkdirSync(path.join(process.cwd(), `/log/`));
     }
 
-    const check_httpExceptionFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_httpException`))
+    const check_httpExceptionFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_httpException`));
     if (!check_httpExceptionFolderIsExists) {
         fs.mkdirSync(path.join(process.cwd(), `/log/_httpException`));
     }
 
-    const check_internalErrorFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_internalError`))
+    const check_internalErrorFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_internalError`));
     if (!check_internalErrorFolderIsExists) {
         fs.mkdirSync(path.join(process.cwd(), `/log/_internalError`));
     }
 
-    const check_notFoundFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_notFound`))
+    const check_notFoundFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_notFound`));
     if (!check_notFoundFolderIsExists) {
         fs.mkdirSync(path.join(process.cwd(), `/log/_notFound`));
     }
 
     const checkModulesFolderIsExists = fs.readdirSync(path.join(process.cwd(), '/src/module'));
     for (const module of checkModulesFolderIsExists) {
-        const checkModuleFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/`+module))
+        const checkModuleFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/` + module));
         console.log(checkModuleFolderIsExists);
         if (!checkModuleFolderIsExists) {
-            fs.mkdirSync(path.join(process.cwd(), `/log/`+module));
+            fs.mkdirSync(path.join(process.cwd(), `/log/` + module));
         }
     }
-
 
     const logFolders = fs.readdirSync(path.join(process.cwd(), '/log'));
     for (const logFolder of logFolders) {
@@ -65,7 +64,7 @@ function logFileCreator() {
 
         let checkIsConfigFolder = path.join(process.cwd(), `/log/${module}`).split('\\');
         checkIsConfigFolder = checkIsConfigFolder[checkIsConfigFolder.length - 1];
-        
+
         const checkIfFileExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`));
         const checkIfFileExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.txt`));
 

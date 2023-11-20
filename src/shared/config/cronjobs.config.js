@@ -1,9 +1,9 @@
-const { loggerCron } = require("../logger/logger.config");
+const { loggerCron } = require('../logger/logger.config');
 
 function runConfigCronJobs() {
-    loggerCron()
+    loggerCron();
 }
 
 module.exports = {
-    runConfigCronJobs
-}
+    runConfigCronJobs,
+};

@@ -11,7 +11,7 @@ const cors = require('cors');
 async function app(routes) {
     const app = express();
     const port = process.env.PORT;
-    
+
     function listener() {
         app.listen(port, () => {
             console.info('=================================');
@@ -20,7 +20,7 @@ async function app(routes) {
             console.info('=================================');
         });
     }
-    
+
     function initMiddlewares() {
         // app.use(logger());
         app.use(cors(CORS_OPTIONS));
@@ -28,29 +28,29 @@ async function app(routes) {
         app.use(express.urlencoded({ extended: true }));
         app.use(expressFileupload());
     }
-    
+
     function initCronjobs() {
         runConfigCronJobs();
     }
 
     function defaultFiles() {
-        defaultFilesCreater()
+        defaultFilesCreater();
     }
-    
+
     function initRoutes(routes) {
         routes.forEach(route => {
             app.use(route);
         });
     }
-    
+
     async function runner() {
-        defaultFiles()
+        defaultFiles();
         initCronjobs();
         initMiddlewares();
         initRoutes(routes);
         listener();
     }
-    
+
     runner();
 }
 
