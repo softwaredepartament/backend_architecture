@@ -1,4 +1,5 @@
 const { internalErrorCatcher } = require('../shared/logger/logger.internal');
+const { logNotFoundWriter } = require('../shared/logger/logger.notfound');
 const { logWriter } = require('../shared/logger/logger.request');
 const { errors } = require('../lib/httpException');
 const path = require('path');
@@ -15,7 +16,7 @@ function logger(isFileRequired = false) {
                 res.end = function (chunk, encoding) {
                     try {
                         if (chunk) {
-                            logWriter(
+                            logNotFoundWriter(
                                 '_notFound',
                                 res.statusCode ? res.statusCode : 500,
                                 req.hostname,

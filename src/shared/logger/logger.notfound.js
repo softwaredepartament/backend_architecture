@@ -4,7 +4,7 @@ const { randomUUID } = require('crypto');
 const path = require('path');
 const fs = require('fs');
 
-function logWriter(module, statusCode, host, method, url, userAgent, body, res) {
+function logNotFoundWriter(module, statusCode, host, method, url, userAgent, body, res) {
     try {
         const logType = statusCode >= 200 && statusCode <= 299 ? 'success' : 'error';
 
@@ -26,15 +26,15 @@ function logWriter(module, statusCode, host, method, url, userAgent, body, res) 
             log_response_body: res,
         }
 
-        let readFile = fs.readFileSync(path.join(process.cwd(), `/log/${module}/${logType}/${nowDate}.json`));
+        let readFile = fs.readFileSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`));
         readFile = JSON.parse(readFile)
         readFile.push(newLog)
-        fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${logType}/${nowDate}.json`), JSON.stringify(readFile));
+        fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`), JSON.stringify(readFile));
     } catch (error) {
         internalErrorCatcher(error);
     }
 }
 
 module.exports = {
-    logWriter,
+    logNotFoundWriter,
 };

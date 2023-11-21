@@ -9,11 +9,6 @@ function logFolderCreator() {
         fs.mkdirSync(path.join(process.cwd(), `/log/`));
     }
 
-    const check_httpExceptionFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_httpException`));
-    if (!check_httpExceptionFolderIsExists) {
-        fs.mkdirSync(path.join(process.cwd(), `/log/_httpException`));
-    }
-
     const check_internalErrorFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_internalError`));
     if (!check_internalErrorFolderIsExists) {
         fs.mkdirSync(path.join(process.cwd(), `/log/_internalError`));
@@ -40,7 +35,7 @@ function logFolderCreator() {
         let checkIsConfigFolder = path.join(process.cwd(), `/log/${logFolder}`).split('\\');
         checkIsConfigFolder = checkIsConfigFolder[checkIsConfigFolder.length - 1];
 
-        if (!checkIfFolderExistsError) {
+        if (!checkIfFolderExistsError && checkIsConfigFolder[0] != '_') {
             fs.mkdirSync(path.join(process.cwd(), `/log/${logFolder}/error/`));
         }
 
@@ -64,18 +59,21 @@ function logFileCreator() {
         let checkIsConfigFolder = path.join(process.cwd(), `/log/${module}`).split('\\');
         checkIsConfigFolder = checkIsConfigFolder[checkIsConfigFolder.length - 1];
 
-        const checkIfFileExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`));
-        const checkIfFileExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.txt`));
-
+        const checkIfFileExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.json`));
+        const checkIfFileExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.json`));
+        
         if (module == '_notFound') {
-            fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), '');
+            const checkIfFileExistsNotFound = fs.existsSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`));
+            if (!checkIfFileExistsNotFound) {
+                fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`), JSON.stringify([]));
+            }
         }
 
         if (!checkIfFileExistsError && checkIsConfigFolder[0] != '_') {
-            fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), '');
+            fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.json`), JSON.stringify([]));
         }
         if (!checkIfFileExistsSuccess && checkIsConfigFolder[0] != '_') {
-            fs.writeFileSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.txt`), '');
+            fs.writeFileSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.json`), JSON.stringify([]));
         }
     }
 }
