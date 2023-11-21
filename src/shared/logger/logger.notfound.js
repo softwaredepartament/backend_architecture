@@ -24,11 +24,11 @@ function logNotFoundWriter(module, statusCode, host, method, url, userAgent, bod
             log_request_user_agent: userAgent,
             log_request_body: body,
             log_response_body: res,
-        }
+        };
 
         let readFile = fs.readFileSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`));
-        readFile = JSON.parse(readFile)
-        readFile.push(newLog)
+        readFile = JSON.parse(readFile);
+        readFile.push(newLog);
         fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`), JSON.stringify(readFile));
     } catch (error) {
         internalErrorCatcher(error);

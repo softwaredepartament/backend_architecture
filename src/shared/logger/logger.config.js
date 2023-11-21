@@ -61,7 +61,7 @@ function logFileCreator() {
 
         const checkIfFileExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.json`));
         const checkIfFileExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.json`));
-        
+
         if (module == '_notFound') {
             const checkIfFileExistsNotFound = fs.existsSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`));
             if (!checkIfFileExistsNotFound) {

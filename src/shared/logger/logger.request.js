@@ -24,11 +24,11 @@ function logWriter(module, statusCode, host, method, url, userAgent, body, res) 
             log_request_user_agent: userAgent,
             log_request_body: body,
             log_response_body: res,
-        }
+        };
 
         let readFile = fs.readFileSync(path.join(process.cwd(), `/log/${module}/${logType}/${nowDate}.json`));
-        readFile = JSON.parse(readFile)
-        readFile.push(newLog)
+        readFile = JSON.parse(readFile);
+        readFile.push(newLog);
         fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${logType}/${nowDate}.json`), JSON.stringify(readFile));
     } catch (error) {
         internalErrorCatcher(error);
