@@ -1,4 +1,4 @@
-const { getCurrentDateFormatted, getCurrentTimeFormatted } = require('../../lib/helpers');
+const { getCurrentDateFormatted, getCurrentTimeFormatted } = require('./../lib/helper');
 const { internalErrorCatcher } = require('./logger.internal');
 const path = require('path');
 const fs = require('fs');

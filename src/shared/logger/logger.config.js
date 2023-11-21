@@ -27,7 +27,6 @@ function logFolderCreator() {
     const checkModulesFolderIsExists = fs.readdirSync(path.join(process.cwd(), '/src/module'));
     for (const module of checkModulesFolderIsExists) {
         const checkModuleFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/` + module));
-        console.log(checkModuleFolderIsExists);
         if (!checkModuleFolderIsExists) {
             fs.mkdirSync(path.join(process.cwd(), `/log/` + module));
         }
@@ -67,6 +66,10 @@ function logFileCreator() {
 
         const checkIfFileExistsError = fs.existsSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`));
         const checkIfFileExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.txt`));
+
+        if (module == '_notFound') {
+            fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), '');
+        }
 
         if (!checkIfFileExistsError && checkIsConfigFolder[0] != '_') {
             fs.writeFileSync(path.join(process.cwd(), `/log/${module}/error/${nowDate}.txt`), '');

@@ -2,7 +2,7 @@ require('dotenv').config({ path: `.env` });
 
 const { defaultFilesCreater } = require('./shared/config/defaultfiles.config');
 const { runConfigCronJobs } = require('./shared/config/cronjobs.config');
-// const { logger } = require('./middleware/logger.middleware');
+const { logger } = require('./middleware/logger.middleware');
 const expressFileupload = require('express-fileupload');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
@@ -22,7 +22,7 @@ async function app(routes) {
     }
 
     function initMiddlewares() {
-        // app.use(logger());
+        app.use(logger());
         app.use(cors(CORS_OPTIONS));
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));

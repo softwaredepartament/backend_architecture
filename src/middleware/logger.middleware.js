@@ -1,6 +1,6 @@
 const { internalErrorCatcher } = require('../shared/logger/logger.internal');
-const { HttpException, errors } = require('../lib/httpException');
 const { logWriter } = require('../shared/logger/logger.request');
+const { errors } = require('../lib/httpException');
 const path = require('path');
 const fs = require('fs');
 
@@ -16,13 +16,17 @@ function logger(isFileRequired = false) {
                     try {
                         if (chunk) {
                             logWriter(
-                                '_notfound',
+                                '_notFound',
                                 res.statusCode ? res.statusCode : 500,
                                 req.hostname,
                                 req.method,
                                 req.url,
                                 req.headers['user-agent'],
-                                req.body,
+                                {
+                                    body: req.body,
+                                    params: req.params,
+                                    query: req.query,
+                                },
                                 /^\s*\{.*\}\s*$/.test(chunk) ? JSON.parse(chunk) : chunk,
                             );
                         }
@@ -72,7 +76,11 @@ function logger(isFileRequired = false) {
                                 req.method,
                                 req.url,
                                 req.headers['user-agent'],
-                                req.body,
+                                {
+                                    body: req.body,
+                                    params: req.params,
+                                    query: req.query,
+                                },
                                 /^\s*\{.*\}\s*$/.test(chunk) ? JSON.parse(chunk) : chunk,
                             );
                         }

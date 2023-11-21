@@ -2,7 +2,7 @@ const { HttpException, errors } = require('./../../lib/httpException');
 
 async function usersModel(params) {
     if (params.id == 1) {
-        throw new HttpException(400, errors.INVALID_TOKEN, 'TOKEN HATOOO!', 'usersModel');
+        throw new HttpException(400, errors.INVALID_TOKEN, 'TOKEN HATOOO!', params);
     }
 
     return 200;
