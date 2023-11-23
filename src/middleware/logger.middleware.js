@@ -40,6 +40,7 @@ function logger(req, res, next) {
                     });
                 }
             };
+            next();
         } else {
             // const originalSendFile = res.sendFile;
             // res.sendFile = function (path, options, callback) {
