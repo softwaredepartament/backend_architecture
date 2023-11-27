@@ -14,8 +14,8 @@ function validator(dto, body) {
                 if (value === undefined || value === null || value === '') {
                     continue;
                 }
-    
-                if (rules.type && typeof value !== rules.type) {
+                
+                if (rules.type &&  rules.type == 'number' ? (isNaN(+value) ? true : false) : typeof value !== rules.type) {
                     return { status: 400, error: `${key}: Expected type ${rules.type}, but got ${typeof value}` };
                 }
                 
