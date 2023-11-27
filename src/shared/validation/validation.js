@@ -50,38 +50,6 @@ function validator(dto, body) {
     }
 }
 
-
-const createUserDTO = {
-    user_firstname: {
-        required: true,
-        type: 'string',
-        minLength: 8,
-        maxLength: 16
-    },
-    user_lastname: {
-        required: true,
-        type: 'string',
-        minLength: 8,
-        maxLength: 16
-    },
-    user_age: {
-        required: true,
-        type: 'number',
-        min: 3,
-        max: 88
-    },
-    user_phone: {
-        required: true,
-        type: 'string',
-        pattern: [/^998[389][012345789][0-9]{7}$/, '998901234567']
-    },
-    user_description: {
-        required: false,
-        type: 'string',
-        maxLength: 32
-    }
-}
-
 module.exports = {
     validator
 }
