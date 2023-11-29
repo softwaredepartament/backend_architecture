@@ -19,6 +19,11 @@ function logFolderCreator() {
         fs.mkdirSync(path.join(process.cwd(), `/log/_notFound`));
     }
 
+    const check_psqlFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/_psql`));
+    if (!check_psqlFolderIsExists) {
+        fs.mkdirSync(path.join(process.cwd(), `/log/_psql`));
+    }
+
     const checkModulesFolderIsExists = fs.readdirSync(path.join(process.cwd(), '/src/module'));
     for (const module of checkModulesFolderIsExists) {
         const checkModuleFolderIsExists = fs.existsSync(path.join(process.cwd(), `/log/` + module));
@@ -63,6 +68,13 @@ function logFileCreator() {
         const checkIfFileExistsSuccess = fs.existsSync(path.join(process.cwd(), `/log/${module}/success/${nowDate}.json`));
 
         if (module == '_notFound') {
+            const checkIfFileExistsNotFound = fs.existsSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`));
+            if (!checkIfFileExistsNotFound) {
+                fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`), JSON.stringify([]));
+            }
+        }
+
+        if (module == '_psql') {
             const checkIfFileExistsNotFound = fs.existsSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`));
             if (!checkIfFileExistsNotFound) {
                 fs.writeFileSync(path.join(process.cwd(), `/log/${module}/${nowDate}.json`), JSON.stringify([]));

@@ -1,5 +1,5 @@
+const { logPsqlWriter } = require('../shared/logger/logger.psql')
 const Pg = require('pg')
-const { internalErrorCatcher } = require('../shared/logger/logger.internal')
 
 const pool = new Pg.Pool({
     user: process.env.DB_USER,
@@ -14,13 +14,18 @@ async function fetchPsql(query, ...arr) {
         const client = await pool.connect()
         const result = await client.query(query, arr)
         client.release()
+        logPsqlWriter(200, result.command, query)
         return result.rows
     } catch (error) {
-        internalErrorCatcher(error)
-        return {
-            status: 400,
-            error: error.stack.split('at async')[error.stack.split('at async').length - 1],
-            query
+        const stackLines = error.stack.split('\n');
+        if (stackLines.length >= 2) {
+            const line = stackLines[4].trim();
+            logPsqlWriter(400, 'unknown', query, line)
+            return {
+                status: 400,
+                error: error.stack.split('at async')[error.stack.split('at async').length - 1],
+                query
+            }
         }
     }
 }
