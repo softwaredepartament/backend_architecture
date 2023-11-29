@@ -4,19 +4,18 @@ const createUsersDto = {
         max: 32,
         min: 10,
         isUuid: true,
-
-    }
-}
+    },
+};
 
 const getUsersDto = {
     id: {
         required: true,
         min: 1,
         max: 30,
-        type: 'number'
-    }
-}
+        type: 'number',
+    },
+};
 
 module.exports = {
-    getUsersDto
-}
+    getUsersDto,
+};

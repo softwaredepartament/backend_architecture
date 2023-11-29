@@ -8,7 +8,7 @@ function requestJwtToken(payload) {
         });
         return token;
     } catch (error) {
-        internalErrorCatcher(error)
+        internalErrorCatcher(error);
     }
 }
 
@@ -19,7 +19,7 @@ function verifyJwtToken(token) {
     } catch (error) {
         if (error.expiredAt) {
             return {
-                status: 402
+                status: 402,
             };
         }
     }
@@ -27,5 +27,5 @@ function verifyJwtToken(token) {
 
 module.exports = {
     requestJwtToken,
-    verifyJwtToken
-}
+    verifyJwtToken,
+};
