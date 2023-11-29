@@ -7,6 +7,7 @@ const expressFileupload = require('express-fileupload');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
 const cors = require('cors');
+const { fetchPsql } = require('./lib/pg');
 
 async function app(routes) {
     const app = express();
