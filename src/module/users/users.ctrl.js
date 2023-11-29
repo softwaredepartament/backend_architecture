@@ -10,7 +10,7 @@ async function usersCtrl(req, res) {
         return res.status(200).send({
             status: 200,
             message: 'ishladi',
-            data: 'hozircha data yoooooqq',
+            data: model,
         });
     } catch (error) {
         return res.status(error.status).json(error);
