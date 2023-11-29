@@ -7,7 +7,7 @@ const expressFileupload = require('express-fileupload');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
 const cors = require('cors');
-const { fetchPsql } = require('./lib/pg');
+const { initDefaultFolders } = require('./config/defaultfiles');
 
 async function app(routes) {
     const app = express();
@@ -35,6 +35,7 @@ async function app(routes) {
     }
 
     function defaultFiles() {
+        initDefaultFolders();
         defaultFilesCreater();
     }
 
