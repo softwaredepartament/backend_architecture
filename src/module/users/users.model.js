@@ -1,5 +1,5 @@
-const { requestJwtToken, verifyJwtToken } = require('../../lib/jwt');
 const { HttpException, errors } = require('./../../lib/httpException');
+const { requestJwtToken } = require('../../lib/jwt');
 
 async function usersModel(params) {
     if (params.id == 1) {

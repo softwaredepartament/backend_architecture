@@ -1,14 +1,11 @@
 const { internalErrorCatcher } = require('../shared/logger/logger.internal');
 const { returnResponse } = require('../lib/express.function');
 const { errors } = require('../lib/httpException');
-const path = require('path');
-const fs = require('fs');
 
 function fileuploadMiddleware(reqFileKeyName, allowedFileTypes, allowedFileSize, isRequired = true) {
     try {
         return (req, res, next) => {
 
-            console.log(typeof reqFileKeyName);
             if (typeof reqFileKeyName == 'object') {
                 for (const requiredFile of reqFileKeyName) {
                     const findFile = req.files ? Object.keys(req.files).find(file => file === requiredFile) : false
@@ -30,9 +27,7 @@ function fileuploadMiddleware(reqFileKeyName, allowedFileTypes, allowedFileSize,
                     }
                 }
             } else {
-                console.log('adsasd');
                 if (!isRequired ? (req.files ? req.files[reqFileKeyName] : false) : false || isRequired) {
-                    console.log('kirdi');
                     const checkFileExists = req.files ? req.files[reqFileKeyName] : false;
                     if (!checkFileExists) {
                         return returnResponse(res, 403, `Expected name ${reqFileKeyName}`, errors.UPLOAD_ERROR);

@@ -1,5 +1,3 @@
-// const { internalErrorCatcher } = require('../logger/logger.internal');
-
 function getCurrentDateFormatted() {
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');

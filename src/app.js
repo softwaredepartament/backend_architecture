@@ -2,12 +2,12 @@ require('dotenv').config({ path: `.env` });
 
 const { defaultFilesCreater } = require('./shared/config/defaultfiles.config');
 const { runConfigCronJobs } = require('./shared/config/cronjobs.config');
+const { initDefaultFolders } = require('./config/defaultfiles');
 const { logger } = require('./middleware/logger.middleware');
 const expressFileupload = require('express-fileupload');
 const CORS_OPTIONS = require('./config/cors');
 const express = require('express');
 const cors = require('cors');
-const { initDefaultFolders } = require('./config/defaultfiles');
 
 async function app(routes) {
     const app = express();
