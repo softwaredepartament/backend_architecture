@@ -41,6 +41,10 @@ function validator(dto, body) {
                 if (rules.pattern && rules.pattern.length && !rules.pattern[0].test(value)) {
                     return { status: 400, error: `${key}: Value does not match the required pattern ${rules.pattern[1]}` };
                 }
+
+                if (rules.custom_validation && !rules.custom_validation[0]) {
+                    return { status: 400, error: `${key}: ${rules.custom_validation[1]}` };
+                }
             }
         }
 
